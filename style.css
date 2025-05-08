@@ -1,0 +1,250 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(160deg, #0f0f2d, #1b1b3c);
+  color: #eee;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Glowing Star Background */
+.background-stars::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(white 1px, transparent 1px);
+  background-size: 4px 4px;
+  animation: twinkle 100s linear infinite;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+@keyframes twinkle {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 10000px 10000px;
+  }
+}
+
+/* Photo Animation */
+.photo-wrapper {
+  position: absolute;
+  top: -300px;
+  width: 280px;
+  animation: moveToCenter 3s ease-out forwards, float 6s ease-in-out infinite;
+  z-index: 10;
+}
+
+.photo {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+  opacity: 0;
+  animation: fadeIn 2s 1.5s forwards;
+}
+
+/* Text content */
+.content {
+  opacity: 0;
+  max-width: 800px;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  animation: showContent 2s ease-in-out 3s forwards;
+  margin-top: 250px;
+}
+
+.name {
+  font-size: 2.8em;
+  font-weight: bold;
+  color: #ffd369;
+  text-shadow: 0 0 12px #ffd369, 0 0 18px #ffa500;
+  margin: 0.5em 0;
+}
+
+.date {
+  font-size: 1.3em;
+  color: #bbb;
+  margin-bottom: 1em;
+}
+
+.message {
+  font-size: 1.2em;
+  line-height: 1.7;
+  color: #ddd;
+}
+
+/* Balloons */
+.balloons {
+  position: fixed;
+  bottom: -150px;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.balloon {
+  width: 40px;
+  height: 60px;
+  border-radius: 50%;
+  position: absolute;
+  animation: rise 12s infinite ease-in;
+  opacity: 0.8;
+}
+
+.balloon::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 40px;
+  background: #fff;
+  left: 50%;
+  top: 60px;
+  transform: translateX(-50%);
+}
+
+.red {
+  background: #ff4d6d;
+  left: 10%;
+  animation-delay: 0s;
+}
+.blue {
+  background: #5bc0eb;
+  left: 40%;
+  animation-delay: 2s;
+}
+.yellow {
+  background: #ffe66d;
+  left: 70%;
+  animation-delay: 4s;
+}
+.purple {
+  background: #c084fc;
+  left: 85%;
+  animation-delay: 1s;
+}
+
+@keyframes rise {
+  0% {
+    bottom: -150px;
+    transform: rotate(0);
+  }
+  100% {
+    bottom: 120%;
+    transform: rotate(360deg);
+  }
+}
+
+/* Animations */
+@keyframes moveToCenter {
+  0% {
+    top: -300px;
+    opacity: 0;
+  }
+  100% {
+    top: 60px;
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes showContent {
+  to {
+    opacity: 1;
+  }
+}
+.gift-button {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(145deg, #ffb347, #ffcc33);
+  border: none;
+  color: #111;
+  font-size: 1.5em;
+  padding: 20px 40px;
+  border-radius: 50px;
+  box-shadow: 0 4px 20px rgba(255, 193, 7, 0.5);
+  cursor: pointer;
+  z-index: 999;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-weight: bold;
+}
+
+.gift-button:hover {
+  transform: translateX(-50%) scale(1.05);
+  box-shadow: 0 10px 40px rgba(255, 193, 7, 0.6);
+}
+
+.gift-button span {
+  animation: sparkle 1.2s infinite;
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    color: #ffd369;
+  }
+  50% {
+    color: rgb(29, 28, 28);
+  }
+}
+
+.gift {
+  position: fixed;
+  bottom: -300px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  z-index: 998;
+  transition: bottom 1.5s ease, opacity 1.5s ease;
+}
+
+.gift.show {
+  bottom: 100px;
+  opacity: 1;
+}
+
+.gift-image {
+  width: 180px;
+  animation: floatGift 3s ease-in-out infinite;
+}
+
+@keyframes floatGift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
